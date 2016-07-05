@@ -28,14 +28,9 @@ import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(Profiles.ACTIVE_DB)
-public class UserMealServiceTest {
+
+
+public abstract class UserMealServiceTest extends BaseServiceTest{
     private static final Logger LOG = LoggerFactory.getLogger(UserMealServiceTest.class);;
 
     @Rule
@@ -58,17 +53,20 @@ public class UserMealServiceTest {
     @Autowired
     protected UserMealService service;
 
+
     @Test
     public void testDelete() throws Exception {
         service.delete(MealTestData.MEAL1_ID, USER_ID);
         MATCHER.assertCollectionEquals(Arrays.asList(MEAL6, MEAL5, MEAL4, MEAL3, MEAL2), service.getAll(USER_ID));
     }
 
+
     @Test
     public void testDeleteNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.delete(MEAL1_ID, 1);
     }
+
 
     @Test
     public void testSave() throws Exception {
@@ -77,17 +75,20 @@ public class UserMealServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(created, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(USER_ID));
     }
 
+
     @Test
     public void testGet() throws Exception {
         UserMeal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
         MATCHER.assertEquals(ADMIN_MEAL, actual);
     }
 
+
     @Test
     public void testGetNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.get(MEAL1_ID, ADMIN_ID);
     }
+
 
     @Test
     public void testUpdate() throws Exception {
@@ -103,6 +104,7 @@ public class UserMealServiceTest {
         thrown.expectMessage("Not found entity with id=" + MEAL1_ID);
         service.update(item, ADMIN_ID);
     }
+
 
     @Test
     public void testGetAll() throws Exception {

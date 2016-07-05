@@ -22,14 +22,9 @@ import java.util.Collections;
 
 import static ru.javawebinar.topjava.UserTestData.*;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(Profiles.ACTIVE_DB)
-public class UserServiceTest {
+
+
+public abstract class UserServiceTest extends BaseServiceTest{
 
     @Autowired
     protected UserService service;
@@ -38,7 +33,7 @@ public class UserServiceTest {
     public void setUp() throws Exception {
         service.evictCache();
     }
-        
+
     @Test
     public void testSave() throws Exception {
         TestUser tu = new TestUser(null, "New", "new@gmail.com", "newPass", 1555, false, Collections.singleton(Role.ROLE_USER));
@@ -59,7 +54,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testNotFoundDelete() throws Exception {
+    public void testDeleteNotFound() throws Exception {
         service.delete(1);
     }
 
