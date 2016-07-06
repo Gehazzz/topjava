@@ -7,6 +7,6 @@ import ru.javawebinar.topjava.service.UserMealServiceTest;
 /**
  * Created by Gena on 03.07.2016.
  */
-@ActiveProfiles(Profiles.ACTIVE_JDBC)
+@ActiveProfiles(Profiles.JDBC)
 public class JdbcUserMealServiceTest extends UserMealServiceTest{
 }
