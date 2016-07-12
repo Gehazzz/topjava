@@ -52,7 +52,7 @@ public class User extends NamedEntity {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Role> roles;
 
@@ -60,7 +60,7 @@ public class User extends NamedEntity {
     @Digits(fraction = 0, integer = 4)
     protected int caloriesPerDay = UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user")
     @OrderBy("dateTime DESC")
     protected List<UserMeal> meals;
 
