@@ -1,12 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/meals"/>
 
 <html>
-<head>
-    <title>Meal</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<%--<head>--%>
+    <%--<title>Meal</title>--%>
+    <%--<link rel="stylesheet" href="css/style.css">--%>
+<%--</head>--%>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h3>

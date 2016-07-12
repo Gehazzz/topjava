@@ -3,9 +3,6 @@ package ru.javawebinar.topjava.web.meal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.service.UserMealService;
@@ -17,20 +14,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-
 /**
- * GKislin
- * 06.03.2015.
+ * Created by Gena on 10.07.2016.
  */
-@Controller
-public class UserMealRestController extends AbstractUserMealController{
-    /*private static final Logger LOG = LoggerFactory.getLogger(UserMealRestController.class);
+public abstract class AbstractUserMealController {
+    protected static final Logger LOG = LoggerFactory.getLogger(UserMealRestController.class);
 
     @Autowired
-    private UserMealService service;
+    protected UserMealService service;
 
     public UserMeal get(int id) {
         int userId = AuthorizedUser.id();
@@ -71,7 +62,7 @@ public class UserMealRestController extends AbstractUserMealController{
         return UserMealsUtil.getFilteredWithExceeded(
                 service.getBetweenDates(
                         startDate != null ? startDate : TimeUtil.MIN_DATE, endDate != null ? endDate : TimeUtil.MAX_DATE, userId),
-                        startTime != null ? startTime : LocalTime.MIN, endTime != null ? endTime : LocalTime.MAX, AuthorizedUser.getCaloriesPerDay()
+                startTime != null ? startTime : LocalTime.MIN, endTime != null ? endTime : LocalTime.MAX, AuthorizedUser.getCaloriesPerDay()
         );
-    }*/
+    }
 }
