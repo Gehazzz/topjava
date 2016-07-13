@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * User: gkislin
@@ -29,7 +30,7 @@ import java.util.*;
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
-    //private static final BeanPropertyRowMapper<Role> ROLE_ROW_MAPPER = BeanPropertyRowMapper.newInstance(Role.class);
+   // private static final BeanPropertyRowMapper<UserRole> ROLE_ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserRole.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -121,12 +122,18 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             public UserRole mapRow(ResultSet resultSet, int i) throws SQLException {
                 UserRole userRoles = new UserRole();
                 userRoles.setUserId(resultSet.getInt("user_id"));
-                userRoles.setRole(Role.ROLE_ADMIN.equals(Role.valueOf(resultSet.getString("role"))) ? Role.ROLE_ADMIN : Role.ROLE_USER);
+                //userRoles.setRole(Role.ROLE_ADMIN.equals(Role.valueOf(resultSet.getString("role"))) ? Role.ROLE_ADMIN : Role.ROLE_USER);
+                userRoles.setRole(Role.valueOf(resultSet.getString("role")));
                 return userRoles;
             }
         });
         List<User> users = jdbcTemplate.query("SELECT * FROM users ORDER BY name, email", ROW_MAPPER);
-        for(User user : users){
+        /*Set<Role> roles = userRoles.stream();*/
+
+        users.stream().forEach(user -> user.setRoles(userRoles.stream()
+                                                              .filter(userRole -> userRole.getUserId() == user.getId())
+                                                              .map(userRole -> userRole.getRole()).collect(Collectors.toSet())));
+        /*for(User user : users){
             Set<Role> roles = new HashSet<>();
             for(UserRole userRole: userRoles){
                 if(user.getId() == userRole.getUserId()){
@@ -134,7 +141,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
                 }
             }
             user.setRoles(roles);
-        }
+        }*/
         return users;
     }
 
@@ -168,4 +175,5 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     public void deleteRole(int id){
         jdbcTemplate.update("DELETE FROM user_roles WHERE user_id=?", id);
     }
+
 }
