@@ -27,4 +27,6 @@ public interface UserService {
     void evictCache();
 
     User getWithMeals(int id);
+
+    void enableUser(int id, boolean enable);
 }

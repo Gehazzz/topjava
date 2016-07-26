@@ -81,3 +81,25 @@ function failNoty(event, jqXHR, options, jsExc) {
         layout: 'bottomRight'
     });
 }
+
+function enableUser(event, id) {
+    //var ch = $(".checkbox");
+    var checkbox = event.target;
+    /*if (checkbox.checked) {
+        //Checkbox has been checked
+        alert(id + " checked");
+
+    } else {
+        //Checkbox has been unchecked
+        alert(id + " unchecked");
+
+    }*/
+        $.ajax({
+               url: ajaxUrl + id,
+               type: 'POST',
+                data: 'enable=' + checkbox.checked,
+               success: function () {
+                   successNoty(checkbox.checked);
+    }
+});
+}
