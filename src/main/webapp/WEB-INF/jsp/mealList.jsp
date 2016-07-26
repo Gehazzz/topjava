@@ -143,7 +143,7 @@
 
     // $(document).ready(function () {
     $(function () {
-        datatableApi = $('#datatable').dataTable({
+        datatableApi = $('#datatable').DataTable({
             "bPaginate": false,
             "bInfo": false,
             "aoColumns": [

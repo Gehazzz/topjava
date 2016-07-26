@@ -5,7 +5,7 @@ function makeEditable() {
     });
 
     $('.delete').click(function () {
-        deleteRow($(this).attr("id"));
+        deleteRow($(this).closest("tr").attr("id"));
     });
 
     $('#detailsForm').submit(function () {
@@ -31,11 +31,12 @@ function deleteRow(id) {
 
 function updateTable() {
     $.get(ajaxUrl, function (data) {
-        datatableApi.fnClearTable();
+        datatableApi.clear();
         $.each(data, function (key, item) {
-            datatableApi.fnAddData(item);
+            datatableApi.rows.add(item);
         });
-        datatableApi.fnDraw();
+        datatableApi.draw();
+
     });
 }
 
