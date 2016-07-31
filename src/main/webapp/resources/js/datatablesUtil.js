@@ -36,6 +36,7 @@ function updateTable() {
             datatableApi.rows.add(item);
         });
         datatableApi.draw();
+        datatableApi.ajax.reload();
 
     });
 }
