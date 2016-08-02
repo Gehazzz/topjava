@@ -21,7 +21,7 @@
                         <label class="control-label col-sm-2" for="startDate">From Date:</label>
 
                         <div class="col-sm-2">
-                            <input class="form-control" type="text"  name="startDate" id="startDate">
+                            <input type="text"  name="startDate" id="startDate">
                         </div>
 
                         <label class="control-label col-sm-2" for="endDate">To Date:</label>
