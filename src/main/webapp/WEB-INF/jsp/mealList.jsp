@@ -134,7 +134,7 @@
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/js/mealDatatables.js"></script>
-<script type="text/javascript" src="webjars/datetimepicker/2.4.7/jquery.datetimepicker.min.js"></script>
+<script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
 <%--<script type="text/javascript">
     var ajaxUrl = 'ajax/profile/meals/';
     var datatableApi;
