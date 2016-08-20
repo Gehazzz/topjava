@@ -16,7 +16,7 @@
             <h3><spring:message code="users.title"/></h3>
 
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="add()"><spring:message code="users.add"/></a>
+                <a class="btn btn-sm btn-info" onclick="add('users.add')"><spring:message code="users.add"/></a>
 
                 <table class="table table-striped display" id="datatable">
                     <thead>
@@ -42,7 +42,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title"><spring:message code="users.edit"/></h2>
+                <h2 class="modal-title" id="modalTitle"></h2>
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
@@ -83,6 +83,9 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+<jsp:include page="fragments/i18n.jsp"/>
+</script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
