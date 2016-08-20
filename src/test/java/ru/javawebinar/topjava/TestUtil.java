@@ -33,13 +33,4 @@ public class TestUtil {
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
     }
-
-    /**
-     * Compare entities using toString
-     */
-    public static class ToStringModelMatcher<T> extends ModelMatcher<T, String> {
-        public ToStringModelMatcher(Class<T> entityClass) {
-            super(Object::toString, entityClass);
-        }
-    }
 }
